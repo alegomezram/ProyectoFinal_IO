@@ -18,10 +18,15 @@ z=(1/r)*np.exp(1j*r)
 phase=np.angle(z)     #wrapped phase
 
 # Plot the surface
-fig = plt.figure()
+fig = plt.figure(1)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, phase,rstride=4, cstride=4,cmap='viridis', edgecolor='none')
-
-#Figures
 plt.savefig("phasewrap.png")
-#plt.imsave("phasewrap.png",surf) 
+
+realphase=np.unwrap(phase)
+
+# Plot the surface
+fig = plt.figure(2)
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, realphase,rstride=4, cstride=4,cmap='viridis', edgecolor='none')
+plt.savefig("phaseunwrap.png")
