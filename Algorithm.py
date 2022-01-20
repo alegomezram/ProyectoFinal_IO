@@ -20,7 +20,7 @@ phase=np.angle(z)     #wrapped phase
 # Plot the surface
 fig = plt.figure()
 ax = plt.axes(projection='3d')
-surf = ax.plot_surface(x, y, phase)
+surf = ax.plot_surface(x, y, phase,rstride=4, cstride=4,cmap='viridis', edgecolor='none')
 
 #Figures
 plt.savefig("phasewrap.png")
