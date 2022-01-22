@@ -22,8 +22,8 @@ surf = ax.plot_surface(x, y, phase,rstride=5, cstride=5,cmap='viridis', edgecolo
 plt.savefig("phasewrap.png")
 plt.imsave("phasewrap2D.png",phase, cmap='gray') 
 
-realphase=np.unwrap(phase)
-
+#realphase=np.unwrap(phase)/2
+realphase=(np.unwrap(np.unwrap(phase,axis=0), axis=1))
 # Plot the surface
 fig = plt.figure(2)
 ax = plt.axes(projection='3d')
