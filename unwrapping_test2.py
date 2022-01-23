@@ -13,18 +13,24 @@ x,y=np.meshgrid(xx,yy)
 im = Image.open('MembranePhase.tif') 
 
 
+
 # Plot the surface
 fig = plt.figure(1)
-# ax = plt.axes(projection='3d')
-# surf = ax.plot_surface(x, y, im,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-# plt.savefig("phasewraptest2.png")
+#ax = plt.axes(projection='3d')
+#surf = ax.plot_surface(x, y, im,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+#plt.savefig("phasewraptest2.png")
 plt.imsave("phasewrap2Dtest2.png",im, cmap='gray') 
 
-# #realphase=np.unwrap(phase)/2
-# realphase=(np.unwrap(np.unwrap(phase,axis=0), axis=1))
-# # Plot the surface
-# fig = plt.figure(2)
-# ax = plt.axes(projection='3d')
-# surf = ax.plot_surface(x, y, realphase,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-# plt.savefig("phaseunwraptest2.png")
-# plt.imsave("phaseunwrap2Dtest2.png",realphase, cmap='gray') 
+#realphase=np.unwrap(phase)/2
+realphase=(np.unwrap(np.unwrap(im,axis=0), axis=1))
+#realphase=np.unwrap(im,axis=0)
+# Plot the surface
+fig = plt.figure(2)
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, realphase,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+#plt.plot(realphase)
+plt.savefig("phaseunwraptest2.png")
+
+plt.figure(3)
+plt.plot(realphase, cmap='gray')
+plt.imsave("phaseunwrap2Dtest2.png",realphase, cmap='gray') 
