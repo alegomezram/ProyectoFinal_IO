@@ -64,12 +64,35 @@ z=3D(realphase_ob,realphase_r,l,d,f)
 
 
 # Plots
+xx=np.linspace(-np.pi,np.pi,num=2048)
+yy=np.linspace(-np.pi,np.pi,num=2048)
+x,y=np.meshgrid(xx,yy)
+
+#Object
 fig = plt.figure(1)
-plt.imsave("phasewrap2D.png",phase, cmap='gray')  #2D plot of wrapped phase
+plt.imsave("phasewrap_obj2D.png",phase, cmap='gray')  #2D plot of wrapped phase
 
-
+#Reference plane
 fig = plt.figure(2)
+plt.imsave("phasewrap_ref2D.png",phase_r, cmap='gray')  #2D plot of wrapped phase
+
+#Object
+fig = plt.figure(3)
 ax = plt.axes(projection='3d')
-surf = ax.plot_surface(x, y, realphase,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-plt.savefig("phaseunwrap.png")                         #3D plot of unwrapped phase
-plt.imsave("phaseunwrap2D.png",realphase, cmap='gray') #2D plot of unwrapped phase
+surf = ax.plot_surface(x, y, realphase_ob,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("phaseunwrap_obj.png")                         #3D plot of unwrapped phase
+plt.imsave("phaseunwrap_obj2D.png",realphase_ob, cmap='gray') #2D plot of unwrapped phase
+
+#Reference plane
+fig = plt.figure(4)
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, realphase_r,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("phaseunwrap_ref.png")                         #3D plot of unwrapped phase
+plt.imsave("phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
+
+#Reconstruction
+fig = plt.figure(4)
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
+plt.imsave("reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
