@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 N=2048
-dx=1
+dx=0.1
 x=dx*np.arange(-N/2,N/2)
 y=dx*np.arange(-N/2,N/2)
 
