@@ -9,7 +9,7 @@ y=dx*np.arange(-N/2,N/2)
 X,Y=np.meshgrid(x,y)
 
 
-Z=np.cos(2*np.pi*X)
+Z=np.cos(2*np.pi*X/3)
 
 
 def minmax(v):
