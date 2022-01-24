@@ -82,7 +82,7 @@ plt.imshow(realphase_ob, cmap='gray')
 
 plt.figure(3)
 plt.imshow(unwraping(z), cmap='gray')
-"""
+
 #Object
 fig = plt.figure(1)
 plt.imsave("phasewrap_obj2D.png",phase, cmap='gray')  #2D plot of wrapped phase
@@ -111,4 +111,3 @@ ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
 plt.imsave("reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
-"""
