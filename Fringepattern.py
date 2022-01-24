@@ -2,13 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 N=2048
-x=np.arange(-N/2,N/2)
-y=np.arange(-N/2,N/2)
+dx=1
+x=dx*np.arange(-N/2,N/2)
+y=dx*np.arange(-N/2,N/2)
 
 X,Y=np.meshgrid(x,y)
 
 
-Z=np.cos(X/5)
+Z=np.cos(2*np.pi*X)
 
 
 def minmax(v):
