@@ -8,8 +8,11 @@ y=dx*np.arange(-N/2,N/2)
 
 X,Y=np.meshgrid(x,y)
 
+w=2*np.pi/3
+Z0=np.cos(w*X)
+Z1=np.cos(w*(X +(1/3)))
+Z2=np.cos(w*(X -(1/3)))
 
-Z=np.cos(2*np.pi*X/3)
 
 
 def minmax(v):
@@ -61,7 +64,13 @@ def dithering_gray(inMat, samplingF):
     # return the thresholded image
     return inMat
 
-plt.imshow(Z,cmap="gray")
-plt.imsave("P.png", Z, cmap="gray")
+plt.imshow(Z0,cmap="gray")
+plt.imsave("Patron0.png", Z0, cmap="gray")
+
+plt.imshow(Z1,cmap="gray")
+plt.imsave("Patron1.png", Z1, cmap="gray")
+
+plt.imshow(Z2,cmap="gray")
+plt.imsave("Patron2.png", Z2, cmap="gray")
 
 plt.show()
