@@ -11,7 +11,7 @@ def unwraping(phase):
 
 	#phase unwrapping
 
-	absolutephase=(np.unwrap(np.unwrap(phase,np.pi/1000,axis=0),np.pi/1000, axis=1))
+	absolutephase=(np.unwrap(np.unwrap(phase,axis=0), axis=-1))
 
 	return absolutephase
 
@@ -26,7 +26,7 @@ def D(phaseobj,phaseref,l,d,f):
 
 	z=(l*deltaph)/(deltaph+(2*np.pi*d*f))  #option2
 
-	#z=z0+c0*(deltaph)   #option3
+#	z=10+1*(deltaph)   #option3
 
 	return z
 
@@ -71,11 +71,11 @@ yy=np.linspace(-np.pi,np.pi,num=1024)
 x,y=np.meshgrid(xx,yy)
 
 plt.figure(1)
-#ax = plt.axes(projection='3d')
-#surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-plt.imshow(I1r, cmap='gray')
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+#plt.imshow(I1r, cmap='gray')
 plt.figure(4)
-plt.imshow(I1, cmap='gray')
+plt.imshow(phase, cmap='gray')
 
 plt.figure(2)
 plt.imshow(realphase_ob, cmap='gray')
