@@ -65,12 +65,12 @@ def dithering_gray(inMat, samplingF):
     return inMat
 
 plt.imshow(Z0,cmap="gray")
-plt.imsave("Patron0.png", Z0, cmap="gray")
+plt.imsave("PatronI2.png", Z0, cmap="gray")
 
 plt.imshow(Z1,cmap="gray")
-plt.imsave("Patron1.png", Z1, cmap="gray")
+plt.imsave("PatronI3.png", Z1, cmap="gray")
 
 plt.imshow(Z2,cmap="gray")
-plt.imsave("Patron2.png", Z2, cmap="gray")
+plt.imsave("PatronI1.png", Z2, cmap="gray")
 
 plt.show()
