@@ -70,10 +70,11 @@ xx=np.linspace(-np.pi,np.pi,num=1024)
 yy=np.linspace(-np.pi,np.pi,num=1024)
 x,y=np.meshgrid(xx,yy)
 
+
 plt.figure(1)
-ax = plt.axes(projection='3d')
-surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-#plt.imshow(I1r, cmap='gray')
+#ax = plt.axes(projection='3d')
+#surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.imshow(I1r, cmap='gray')
 plt.figure(4)
 plt.imshow(phase, cmap='gray')
 
@@ -81,8 +82,8 @@ plt.figure(2)
 plt.imshow(realphase_ob, cmap='gray')
 
 plt.figure(3)
-plt.imshow(unwraping(z), cmap='gray')
-
+plt.imshow(z, cmap='gray')
+"""
 #Object
 fig = plt.figure(1)
 plt.imsave("phasewrap_obj2D.png",phase, cmap='gray')  #2D plot of wrapped phase
@@ -111,3 +112,6 @@ ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
 plt.imsave("reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
+
+
+"""
