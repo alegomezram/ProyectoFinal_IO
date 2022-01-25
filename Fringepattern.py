@@ -8,7 +8,7 @@ y=dx*np.arange(-N/2,N/2)
 
 X,Y=np.meshgrid(x,y)
 
-w=2*np.pi/3
+w=2*np.pi/20
 Z0=np.cos(w*X)
 Z1=np.cos(w*(X +(1/3)))
 Z2=np.cos(w*(X -(1/3)))
