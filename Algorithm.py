@@ -42,9 +42,9 @@ I2r= cv2.imread("I2r.png",0)  #Intensity of fringe pattern with phase shift=0
 I3r= cv2.imread("I3r.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #System setup values
-l=60  #(60cm)  #Distance between camera/projector plane and reference plane
-d=12   #(12cm)Distance between camera and projector
-f=1   #Frequency of the projected fringe pattern
+l=40  #(60cm)  #Distance between camera/projector plane and reference plane
+d=8   #(12cm)Distance between camera and projector
+f=1/4   #Frequency of the projected fringe pattern
 
 
 
@@ -71,19 +71,19 @@ yy=np.linspace(-np.pi,np.pi,num=1024)
 x,y=np.meshgrid(xx,yy)
 
 
-plt.figure(1)
-#ax = plt.axes(projection='3d')
-#surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-plt.imshow(I1, cmap='gray')
-plt.figure(4)
-plt.imshow(phase, cmap='gray')
+# plt.figure(1)
+# #ax = plt.axes(projection='3d')
+# #surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+# plt.imshow(I1, cmap='gray')
+# plt.figure(4)
+# plt.imshow(phase, cmap='gray')
 
-plt.figure(2)
-plt.imshow(realphase_r, cmap='gray')
+# plt.figure(2)
+# plt.imshow(realphase_r, cmap='gray')
 
-plt.figure(3)
-plt.imshow(z, cmap='gray')
-"""
+# plt.figure(3)
+# plt.imshow(z, cmap='gray')
+
 #Object
 fig = plt.figure(1)
 plt.imsave("phasewrap_obj2D.png",phase, cmap='gray')  #2D plot of wrapped phase
