@@ -10,8 +10,8 @@ X,Y=np.meshgrid(x,y)
 
 w=2*np.pi/20
 Z0=np.cos(w*X)
-Z1=np.cos(w*(X +(1/3)))
-Z2=np.cos(w*(X -(1/3)))
+Z1=np.cos(w*X +(2*np.pi/3))
+Z2=np.cos(w*X -(2*np.pi/3))
 
 
 
@@ -64,12 +64,15 @@ def dithering_gray(inMat, samplingF):
     # return the thresholded image
     return inMat
 
+plt.figure()
 plt.imshow(Z0,cmap="gray")
 plt.imsave("PatronI2.png", Z0, cmap="gray")
 
+plt.figure()
 plt.imshow(Z1,cmap="gray")
 plt.imsave("PatronI3.png", Z1, cmap="gray")
 
+plt.figure()
 plt.imshow(Z2,cmap="gray")
 plt.imsave("PatronI1.png", Z2, cmap="gray")
 
