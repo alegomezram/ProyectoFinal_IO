@@ -10,7 +10,8 @@ xx=np.linspace(-np.pi,np.pi,num=2048)
 yy=np.linspace(-np.pi,np.pi,num=2048)
 x,y=np.meshgrid(xx,yy)
 
-im = Image.open('MembranePhase.tif') 
+#im = Image.open('MembranePhase.tif') 
+im= cv2.imread("MembranePhase.png",0)
 
 #realphase=np.unwrap(phase)/2
 realphase=(np.unwrap(np.unwrap(im,np.pi/100,axis=0),np.pi/100, axis=1))
