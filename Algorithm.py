@@ -4,6 +4,7 @@ from mpl_toolkits import mplot3d
 import numpy as np
 import time
 import cv2
+from PIL import Image
 
 #Functions
 
@@ -31,15 +32,25 @@ def D(phaseobj,phaseref,l,d,f):
 	return z
 
 
+# #Import pictures of object
+# I1= cv2.imread("I1.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
+# I2= cv2.imread("I2.png",0)  #Intensity of fringe pattern with phase shift=0
+# I3= cv2.imread("I3.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+
+# #Import pictures of reference plane
+# I1r= cv2.imread("I1r.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
+# I2r= cv2.imread("I2r.png",0)  #Intensity of fringe pattern with phase shift=0
+# I3r= cv2.imread("I3r.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+
 #Import pictures of object
-I1= cv2.imread("I1.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-I2= cv2.imread("I2.png",0)  #Intensity of fringe pattern with phase shift=0
-I3= cv2.imread("I3.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+I1= Image.open("I1.tif",0)  #Intensity of fringe pattern with phase shift=-2pi/3
+I2= Image.open("I2.tif",0)  #Intensity of fringe pattern with phase shift=0
+I3= Image.open("I3.tif",0)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of reference plane
-I1r= cv2.imread("I1r.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-I2r= cv2.imread("I2r.png",0)  #Intensity of fringe pattern with phase shift=0
-I3r= cv2.imread("I3r.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+I1r= Image.open("I1r.tif",0)  #Intensity of fringe pattern with phase shift=-2pi/3
+I2r= Image.open("I2r.tif",0)  #Intensity of fringe pattern with phase shift=0
+I3r= Image.open("I3r.tif",0)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #System setup values
 l=40  #(60cm)  #Distance between camera/projector plane and reference plane
@@ -86,7 +97,7 @@ x,y=np.meshgrid(xx,yy)
 
 #Object
 fig = plt.figure(1)
-plt.imsave("1phasewrap_obj2D.png",phase, cmap='gray')  #2D plot of wrapped phase
+plt.imsave("1phasewrap_obj2D.png",phase)  #2D plot of wrapped phase
 
 #Reference plane
 fig = plt.figure(2)
