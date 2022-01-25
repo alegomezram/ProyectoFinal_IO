@@ -43,14 +43,14 @@ def D(phaseobj,phaseref,l,d,f):
 # I3r= cv2.imread("I3r.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of object
-I1= Image.open("I1.tif",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-I2= Image.open("I2.tif",0)  #Intensity of fringe pattern with phase shift=0
-I3= Image.open("I3.tif",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+I1= Image.open("I1.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2= Image.open("I2.tif")  #Intensity of fringe pattern with phase shift=0
+I3= Image.open("I3.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of reference plane
-I1r= Image.open("I1r.tif",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-I2r= Image.open("I2r.tif",0)  #Intensity of fringe pattern with phase shift=0
-I3r= Image.open("I3r.tif",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2r= Image.open("I2r.tif")  #Intensity of fringe pattern with phase shift=0
+I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #System setup values
 l=40  #(60cm)  #Distance between camera/projector plane and reference plane
