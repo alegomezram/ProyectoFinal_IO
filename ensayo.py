@@ -1,8 +1,13 @@
 import cv2
 from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
 
-img = Image.open("I1.png") 
-print (img.histogram())
 
-I1= cv2.imread("I1.png",-1)
-print (I1.histogram())
+x=np.array([0,0,0,0,1,1])
+
+lista=np.where(x>0)
+
+y=x
+y[lista]=1/x[lista]
+print(x,y,lista)

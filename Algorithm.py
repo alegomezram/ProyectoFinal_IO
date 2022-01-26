@@ -5,6 +5,8 @@ import numpy as np
 import time
 import cv2
 from PIL import Image
+from skimage import data, img_as_float, color, exposure
+from skimage.restoration import unwrap_phase
 
 #Functions
 
@@ -13,19 +15,21 @@ def unwraping(phase):
 	#phase unwrapping
 
 	absolutephase=(np.unwrap(np.unwrap(phase,axis=0), axis=-1))
+	#absolutephase = unwrap_phase(phase) #skimage function
+
 
 	return absolutephase
 
 
-def D(phaseobj,phaseref,l,d,f):
+def reconst(phaseobj,phaseref,l,d,f):
 
 	#Depth information acquisition
 
 	deltaph=phaseobj-phaseref   #phase difference
 
-#	z=(l/d)*(deltaph)  #option1
+	z=(l/d)*(deltaph)  #option1
 
-	z=(l*deltaph)/(deltaph+(2*np.pi*d*f))  #option2
+#	z=(l*deltaph)/(deltaph+(2*np.pi*d*f))  #option2
 
 #	z=10+1*(deltaph)   #option3
 
@@ -33,14 +37,14 @@ def D(phaseobj,phaseref,l,d,f):
 
 
 # #Import pictures of object
-# I1= cv2.imread("I1.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-# I2= cv2.imread("I2.png",0)  #Intensity of fringe pattern with phase shift=0
-# I3= cv2.imread("I3.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+# I1= cv2.imread("I1.png",-1)  #Intensity of fringe pattern with phase shift=-2pi/3
+# I2= cv2.imread("I2.png",-1)  #Intensity of fringe pattern with phase shift=0
+# I3= cv2.imread("I3.png",-1)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 # #Import pictures of reference plane
-# I1r= cv2.imread("I1r.png",0)  #Intensity of fringe pattern with phase shift=-2pi/3
-# I2r= cv2.imread("I2r.png",0)  #Intensity of fringe pattern with phase shift=0
-# I3r= cv2.imread("I3r.png",0)  #Intensity of fringe pattern with phase shift=+2pi/3
+# I1r= cv2.imread("I1r.png",-1)  #Intensity of fringe pattern with phase shift=-2pi/3
+# I2r= cv2.imread("I2r.png",-1)  #Intensity of fringe pattern with phase shift=0
+# I3r= cv2.imread("I3r.png",-1)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of object
 I1= Image.open("I1.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
@@ -52,19 +56,17 @@ I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
 I2r= Image.open("I2r.tif")  #Intensity of fringe pattern with phase shift=0
 I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
-np.set_printoptions(threshold=np.inf)
-
-I1 = np.array(I1, dtype=np.float64)
+#Convert to arrays
+I1 = np.array(I1)
 #print("I1",I1)
-I2 = np.array(I2, dtype=np.float64)
+I2 = np.array(I2)
 #print("I2",I2)
-I3 = np.array(I3, dtype=np.float64)
+I3 = np.array(I3)
 #print("I3",I3)
 
-I1r = np.array(I1r, dtype=np.float64)
-I2r = np.array(I2r, dtype=np.float64)
-I3r = np.array(I3r, dtype=np.float64)
-
+I1r = np.array(I1r)
+I2r = np.array(I2r)
+I3r = np.array(I3r)
 
 #System setup values
 l=40  #(60cm)  #Distance between camera/projector plane and reference plane
@@ -73,17 +75,28 @@ f=1   #Frequency of the projected fringe
 
 
 #Object
-eq=np.sqrt(3)*((I1-I3)/(2*I2-I1-I3))
-phase=np.arctan(eq)         #Relative phase calculation
+eq=np.zeros((1024,1024))
+mat1=I1-I3
+mat2=2*I2-I1-I3
+lp=np.where(mat2!= 0)         #to avoid divisions by zero
+eq[lp]=np.sqrt(3)*(mat1[lp]/mat2[lp])
+#eq=np.sqrt(3)*((I1-I3)/(2*I2-I1-I3))
+phase=np.arctan(eq)            #Relative phase calculation
 realphase_ob=unwraping(phase)  #Absolute phase calculation
 
+
 #Reference plane
-eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
+eq_r=np.zeros((1024,1024))
+mat1r=I1r-I3r
+mat2r=2*I2r-I1r-I3r
+lr=np.where(mat2r!= 0)          #to avoid divisions by zero
+eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
+#eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
 realphase_r=unwraping(phase_r)  #Absolute phase calculation
 
 #3D object reconstruction
-z=D(realphase_ob,realphase_r,l,d,f)
+z=reconst(realphase_ob,realphase_r,l,d,f)
 
 
 
@@ -110,7 +123,7 @@ x,y=np.meshgrid(xx,yy)
 
 #Object
 fig = plt.figure(1)
-plt.imsave("1phasewrap_obj2D.png",phase)  #2D plot of wrapped phase
+plt.imsave("1phasewrap_obj2D.png",phase,cmap='gray')  #2D plot of wrapped phase
 
 #Reference plane
 fig = plt.figure(2)
