@@ -105,10 +105,10 @@ eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
 slicee=phase_r[512,:]
-plt.plot(slicee,extent=[-u,u,-v,v])
+plt.plot(xx,slicee)
 plt.savefig("slicee.png")
 realphase_r=unwraping(slicee)  #Absolute phase calculation
-plt.plot(realphase_r,extent=[-u,u,-v,v])
+plt.plot(xx,realphase_r)
 plt.savefig("unwrappedslicee.png")
 
 #3D object reconstruction
