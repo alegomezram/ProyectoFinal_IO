@@ -54,16 +54,16 @@ I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 np.set_printoptions(threshold=np.inf)
 
-I1 = np.array(I1)
+I1 = np.array(I1, dtype=np.float64)
 #print("I1",I1)
-I2 = np.array(I2)
+I2 = np.array(I2, dtype=np.float64)
 #print("I2",I2)
-I3 = np.array(I3)
+I3 = np.array(I3, dtype=np.float64)
 #print("I3",I3)
 
-I1r = np.array(I1r)
-I2r = np.array(I2r)
-I3r = np.array(I3r)
+I1r = np.array(I1r, dtype=np.float64)
+I2r = np.array(I2r, dtype=np.float64)
+I3r = np.array(I3r, dtype=np.float64)
 
 
 #System setup values
