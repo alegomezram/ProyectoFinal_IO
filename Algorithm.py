@@ -68,10 +68,21 @@ I1r = np.array(I1r)
 I2r = np.array(I2r)
 I3r = np.array(I3r)
 
-#System setup values
-l=40  #(60cm)  #Distance between camera/projector plane and reference plane
-d=8   #(12cm)Distance between camera and projector
-f=1   #Frequency of the projected fringe
+#System setup values and real coordinates
+#All units in um
+l=400000  #(40cm)  #Distance between camera/projector plane and reference plane
+d=80000   #(8cm)Distance between camera and projector
+f=10000   #Frequency of the projected fringe
+
+M=1024 #Number of pixels along x axis
+N=1024 #Number of pixels along y axis
+dx=35.16 #size of pixels (35um)
+dy=35.16
+u=M/2*dx  #image size (width of camera 36mm)
+v=N/2*dy
+xx=np.linspace(-u,u,num=M)
+yy=np.linspace(-v,v,num=N)
+x,y=np.meshgrid(xx,yy)
 
 
 #Object
@@ -94,10 +105,10 @@ eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
 slicee=phase_r[512,:]
-plt.plot(slicee)
+plt.plot(slicee,extent=[-u,u,-v,v])
 plt.savefig("slicee.png")
 realphase_r=unwraping(slicee)  #Absolute phase calculation
-plt.plot(realphase_r)
+plt.plot(realphase_r,extent=[-u,u,-v,v])
 plt.savefig("unwrappedslicee.png")
 
 #3D object reconstruction
@@ -108,11 +119,6 @@ z=reconst(realphase_ob,realphase_r,l,d,f)
 
 
 # Plots
-xx=np.linspace(-np.pi,np.pi,num=1024)
-yy=np.linspace(-np.pi,np.pi,num=1024)
-x,y=np.meshgrid(xx,yy)
-
-
 # plt.figure(1)
 # #ax = plt.axes(projection='3d')
 # #surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
