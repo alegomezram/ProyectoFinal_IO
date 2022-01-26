@@ -52,20 +52,24 @@ I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
 I2r= Image.open("I2r.tif")  #Intensity of fringe pattern with phase shift=0
 I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
+np.set_printoptions(threshold=np.inf)
+
 I1 = np.array(I1)
+#print("I1",I1)
 I2 = np.array(I2)
+#print("I2",I2)
 I3 = np.array(I3)
+#print("I3",I3)
 
 I1r = np.array(I1r)
 I2r = np.array(I2r)
-I3r = np.array(I3r) 
+I3r = np.array(I3r)
 
 
 #System setup values
 l=40  #(60cm)  #Distance between camera/projector plane and reference plane
 d=8   #(12cm)Distance between camera and projector
-f=1/4   #Frequency of the projected fringe pattern
-
+f=1/4   #Frequency of the projected fringe
 
 
 #Object
