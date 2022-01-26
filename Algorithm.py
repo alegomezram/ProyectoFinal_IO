@@ -107,8 +107,8 @@ phase_r=np.arctan(eq_r)         #Relative phase calculation
 slicee=phase_r[512,:]
 plt.plot(xx,slicee)
 plt.savefig("slicee.png")
-realphase_r=unwraping(slicee)  #Absolute phase calculation
-plt.plot(xx,realphase_r)
+realphase_r=np.unwrap(slicee,discont=703.2)  #Absolute phase calculation
+plt.plot(xx,realphase_r)                #(703.2 son 20 pixeles*dx, que es lo que mide cada discontinuidad)
 plt.savefig("unwrappedslicee.png")
 
 #3D object reconstruction
