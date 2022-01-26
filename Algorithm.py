@@ -93,7 +93,12 @@ lr=np.where(mat2r!= 0)          #to avoid divisions by zero
 eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
-realphase_r=unwraping(phase_r)  #Absolute phase calculation
+slicee=phase_r[512,:]
+plt.plot(slicee)
+plt.savefig("slicee.png")
+realphase_r=unwraping(slicee)  #Absolute phase calculation
+plt.plot(realphase_r)
+plt.savefig("unwrappedslicee.png")
 
 #3D object reconstruction
 z=reconst(realphase_ob,realphase_r,l,d,f)
@@ -127,7 +132,7 @@ plt.imsave("1phasewrap_obj2D.png",phase,cmap='gray')  #2D plot of wrapped phase
 
 #Reference plane
 fig = plt.figure(2)
-plt.imsave("2phasewrap_ref2D.png",phase_r, cmap='gray')  #2D plot of wrapped phase
+#plt.imsave("2phasewrap_ref2D.png",phase_r, cmap='gray')  #2D plot of wrapped phase
 
 #Object
 fig = plt.figure(3)
@@ -141,12 +146,12 @@ fig = plt.figure(4)
 # ax = plt.axes(projection='3d')
 # surf = ax.plot_surface(x, y, realphase_r,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 # plt.savefig("phaseunwrap_ref.png")                         #3D plot of unwrapped phase
-plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
+#plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
 
 #Reconstruction
 fig = plt.figure(5)
 # ax = plt.axes(projection='3d')
 # surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 # plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
-plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
+#plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
 
