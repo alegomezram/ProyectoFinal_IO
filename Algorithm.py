@@ -69,7 +69,7 @@ I3r = np.array(I3r)
 #System setup values
 l=40  #(60cm)  #Distance between camera/projector plane and reference plane
 d=8   #(12cm)Distance between camera and projector
-f=1/4   #Frequency of the projected fringe
+f=1   #Frequency of the projected fringe
 
 
 #Object
