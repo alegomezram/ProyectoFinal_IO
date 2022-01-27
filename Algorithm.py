@@ -68,6 +68,8 @@ I1r = np.array(I1r)
 I2r = np.array(I2r)
 I3r = np.array(I3r)
 
+np.set_printoptions(threshold=np.inf)
+
 #System setup values and real coordinates
 #All units in um
 l=400000  #(40cm)  #Distance between camera/projector plane and reference plane
@@ -105,9 +107,10 @@ eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
 slicee=phase_r[512,:]
+print(phase_r[512,:])
 plt.plot(xx,slicee)
 plt.savefig("slicee.png")
-realphase_r=np.unwrap(slicee,discont=703.2)  #Absolute phase calculation
+realphase_r=np.unwrap(slicee,period=24)  #Absolute phase calculation
 plt.plot(xx,realphase_r)                #(703.2 son 20 pixeles*dx, que es lo que mide cada discontinuidad)
 plt.savefig("unwrappedslicee.png")
 
