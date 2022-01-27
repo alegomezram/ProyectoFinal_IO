@@ -17,10 +17,23 @@ phase=[1.55815429,  1.41461946,  1.26041304,
  -0.95772925, -1.04035161, -1.12948989, -1.22074281, -1.31700043, -1.41290038,
  -1.53733924]
 
-print(phase)
-phase=phase*2*np.pi
+print("1",phase)
+plt.figure(1)
+plt.plot(phase)
+plt.savefig("1.png")
 
-print(np.unwrap(phase,discont=0.09))
+phase=np.array(phase)
+phase=phase*2*np.pi
+plt.figure(2)
+plt.plot(phase)
+plt.savefig("2.png")
+print("2",phase)
+
+p=np.unwrap(phase)
+print("3",p)
+plt.figure(3)
+plt.plot(p)
+plt.savefig("3.png")
 
 # l1 =[1, 2, 3, 4, 5]
 # print("Result 1: ", np.unwrap(l1))

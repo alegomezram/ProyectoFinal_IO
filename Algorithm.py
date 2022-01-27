@@ -95,7 +95,7 @@ lp=np.where(mat2!= 0)         #to avoid divisions by zero
 eq[lp]=np.sqrt(3)*(mat1[lp]/mat2[lp])
 #eq=np.sqrt(3)*((I1-I3)/(2*I2-I1-I3))
 phase=np.arctan(eq)            #Relative phase calculation
-realphase_ob=unwraping(phase)  #Absolute phase calculation
+realphase_ob=unwraping(phase*2*np.pi)  #Absolute phase calculation
 
 
 #Reference plane
@@ -106,13 +106,13 @@ lr=np.where(mat2r!= 0)          #to avoid divisions by zero
 eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
 phase_r=np.arctan(eq_r)         #Relative phase calculation
-slicee=phase_r[512,:]
-print(phase_r[512,:])
-plt.plot(xx,slicee)
-plt.savefig("slicee.png")
-realphase_r=np.unwrap(slicee,period=24)  #Absolute phase calculation
-plt.plot(xx,realphase_r)                #(703.2 son 20 pixeles*dx, que es lo que mide cada discontinuidad)
-plt.savefig("unwrappedslicee.png")
+#slicee=phase_r[512,:]
+#print(phase_r[512,:])
+#plt.plot(xx,slicee)
+#plt.savefig("slicee.png")
+realphase_r=unwraping(phase_r*2*np.pi)  #Absolute phase calculation
+#plt.plot(xx,realphase_r)                #(703.2 son 20 pixeles*dx, que es lo que mide cada discontinuidad)
+#plt.savefig("unwrappedslicee.png")
 
 #3D object reconstruction
 z=reconst(realphase_ob,realphase_r,l,d,f)
@@ -141,26 +141,26 @@ plt.imsave("1phasewrap_obj2D.png",phase,cmap='gray')  #2D plot of wrapped phase
 
 #Reference plane
 fig = plt.figure(2)
-#plt.imsave("2phasewrap_ref2D.png",phase_r, cmap='gray')  #2D plot of wrapped phase
+plt.imsave("2phasewrap_ref2D.png",phase_r, cmap='gray')  #2D plot of wrapped phase
 
 #Object
 fig = plt.figure(3)
-# ax = plt.axes(projection='3d')
-# surf = ax.plot_surface(x, y, realphase_ob,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-# plt.savefig("phaseunwrap_obj.png")                         #3D plot of unwrapped phase
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, realphase_ob,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("phaseunwrap_obj.png")                         #3D plot of unwrapped phase
 plt.imsave("3phaseunwrap_obj2D.png",realphase_ob, cmap='gray') #2D plot of unwrapped phase
 
 #Reference plane
 fig = plt.figure(4)
-# ax = plt.axes(projection='3d')
-# surf = ax.plot_surface(x, y, realphase_r,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-# plt.savefig("phaseunwrap_ref.png")                         #3D plot of unwrapped phase
-#plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, realphase_r,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("phaseunwrap_ref.png")                         #3D plot of unwrapped phase
+plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
 
 #Reconstruction
 fig = plt.figure(5)
-# ax = plt.axes(projection='3d')
-# surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-# plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
-#plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
+ax = plt.axes(projection='3d')
+surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
+plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
 
