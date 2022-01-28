@@ -14,8 +14,8 @@ def unwraping(phase):
 
 	#phase unwrapping
 
-	absolutephase=(np.unwrap(np.unwrap(phase,axis=0), axis=-1))
-	#absolutephase = unwrap_phase(phase) #skimage function
+	#absolutephase=(np.unwrap(np.unwrap(phase,axis=0), axis=-1))
+	absolutephase = unwrap_phase(phase) #skimage function
 
 
 	return absolutephase
@@ -47,9 +47,9 @@ def reconst(phaseobj,phaseref,l,d,f):
 # I3r= cv2.imread("I3r.png",-1)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of object
-I1= Image.open("I1.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
-I2= Image.open("I2.tif")  #Intensity of fringe pattern with phase shift=0
-I3= Image.open("I3.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
+I1= Image.open("I1f.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2= Image.open("I2f.tif")  #Intensity of fringe pattern with phase shift=0
+I3= Image.open("I3f.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of reference plane
 I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
@@ -88,29 +88,29 @@ x,y=np.meshgrid(xx,yy)
 
 
 #Object
-eq=np.zeros((1024,1024))
-mat1=I1-I3
-mat2=2*I2-I1-I3
-lp=np.where(mat2!= 0)         #to avoid divisions by zero
-eq[lp]=np.sqrt(3)*(mat1[lp]/mat2[lp])
+#eq=np.zeros((1024,1024))
+#mat1=I1-I3
+#mat2=2*I2-I1-I3
+#lp=np.where(mat2!= 0)         #to avoid divisions by zero
+#eq[lp]=np.sqrt(3)*(mat1[lp]/mat2[lp])
 #eq=np.sqrt(3)*((I1-I3)/(2*I2-I1-I3))
-phase=np.arctan(eq)            #Relative phase calculation
-realphase_ob=unwraping(phase*2*np.pi)  #Absolute phase calculation
+phase=np.arctan2(np.sqrt(3)*(I1-I3), 2*I2-I1-I3)            #Relative phase calculation
+realphase_ob=unwraping(phase)  #Absolute phase calculation
 
 
 #Reference plane
-eq_r=np.zeros((1024,1024))
-mat1r=I1r-I3r
-mat2r=2*I2r-I1r-I3r
-lr=np.where(mat2r!= 0)          #to avoid divisions by zero
-eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
+# eq_r=np.zeros((1024,1024))
+# mat1r=I1r-I3r
+# mat2r=2*I2r-I1r-I3r
+# lr=np.where(mat2r!= 0)          #to avoid divisions by zero
+# eq_r[lr]=np.sqrt(3)*(mat1r[lr]/mat2r[lr])
 #eq_r=np.sqrt(3)*((I1r-I3r)/(2*I2r-I1r-I3r))
-phase_r=np.arctan(eq_r)         #Relative phase calculation
+phase_r=np.arctan2(np.sqrt(3)*(I1r-I3r), 2*I2r-I1r-I3r)         #Relative phase calculation
 #slicee=phase_r[512,:]
 #print(phase_r[512,:])
 #plt.plot(xx,slicee)
 #plt.savefig("slicee.png")
-realphase_r=unwraping(phase_r*2*np.pi)  #Absolute phase calculation
+realphase_r=unwraping(phase_r)  #Absolute phase calculation
 #plt.plot(xx,realphase_r)              
 #plt.savefig("unwrappedslicee.png")
 
