@@ -52,9 +52,9 @@ I2= Image.open("I2f.tif")  #Intensity of fringe pattern with phase shift=0
 I3= Image.open("I3f.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of reference plane
-I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
-I2r= Image.open("I2r.tif")  #Intensity of fringe pattern with phase shift=0
-I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
+I1r= Image.open("I1rf.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2r= Image.open("I2rf.tif")  #Intensity of fringe pattern with phase shift=0
+I3r= Image.open("I3rf.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Convert to arrays
 I1 = np.array(I1)
