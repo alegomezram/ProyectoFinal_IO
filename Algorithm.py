@@ -29,9 +29,16 @@ def reconst(phaseobj,phaseref,l,d,f):
 
 	z=(l/d)*(deltaph)  #option1
 
-#	z=(l*deltaph)/(deltaph+(2*np.pi*d*f))  #option2
+	#z=(l*deltaph)/(deltaph+(2*np.pi*d*f))  #option2
 
-#	z=10+1*(deltaph)   #option3
+#	z=z0+c0*(deltaph)   #option3
+
+	# for x in z:
+	# 	for y in x:
+	# 		if y <0.008:
+	# 			z*(-1)
+	l=np.where(z>-32) 
+	z[l]=z[l]*(-1)
 
 	return z
 
@@ -58,11 +65,8 @@ I3r= Image.open("I3rf.tif")  #Intensity of fringe pattern with phase shift=+2pi/
 
 #Convert to arrays
 I1 = np.array(I1)
-#print("I1",I1)
 I2 = np.array(I2)
-#print("I2",I2)
 I3 = np.array(I3)
-#print("I3",I3)
 
 I1r = np.array(I1r)
 I2r = np.array(I2r)
@@ -161,6 +165,7 @@ plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrap
 fig = plt.figure(5)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+#ax.invert_zaxis()
 plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
-plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
+plt.imsave("5reconstruction2D.png",z) #2D plot of unwrapped phase
 
