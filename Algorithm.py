@@ -37,8 +37,9 @@ def reconst(phaseobj,phaseref,l,d,f):
 	# 	for y in x:
 	# 		if y <0.008:
 	# 			z*(-1)
+	minimum=np.min(z)
 	l=np.where(z>-32) 
-	z[l]=z[l]*(-1)
+	z[l]=minimum
 
 	return z
 
