@@ -169,5 +169,5 @@ surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='n
 ax.view_init(40, 10)
 plt.savefig("reconstruction3D2.png")                         #3D plot of unwrapped phase
 plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase
-plt.imsave("5reconstruction3D.png",surf, cmap='gray')
+
 
