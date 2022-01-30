@@ -117,6 +117,9 @@ realphase_r=unwraping(phase_r)  #Absolute phase calculation
 #3D object reconstruction
 z=reconst(realphase_ob,realphase_r,l,d,f)
 
+minimum=np.min(z)
+l=np.where(z>-20.) 
+z[l]=-32.
 
 
 
@@ -157,10 +160,13 @@ surf = ax.plot_surface(x, y, realphase_r,rstride=5, cstride=5,cmap='viridis', ed
 plt.savefig("phaseunwrap_ref.png")                         #3D plot of unwrapped phase
 plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrapped phase
 
+
+
 #Reconstruction
 fig = plt.figure(5)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
+ax.view_init(40, 10)
 plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
 plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
 
