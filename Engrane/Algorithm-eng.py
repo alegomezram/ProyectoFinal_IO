@@ -47,14 +47,14 @@ def reconst(phaseobj,phaseref,l,d,f):
 # I3r= cv2.imread("I3r.png",-1)  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of object
-I1= Image.open("I1.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
-I2= Image.open("I2.tif")  #Intensity of fringe pattern with phase shift=0
-I3= Image.open("I3.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
+I1= Image.open("I1f.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2= Image.open("I2f.tif")  #Intensity of fringe pattern with phase shift=0
+I3= Image.open("I3f.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Import pictures of reference plane
-I1r= Image.open("I1r.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
-I2r= Image.open("I2r.tif")  #Intensity of fringe pattern with phase shift=0
-I3r= Image.open("I3r.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
+I1r= Image.open("I1rf.tif")  #Intensity of fringe pattern with phase shift=-2pi/3
+I2r= Image.open("I2rf.tif")  #Intensity of fringe pattern with phase shift=0
+I3r= Image.open("I3rf.tif")  #Intensity of fringe pattern with phase shift=+2pi/3
 
 #Convert to arrays
 I1 = np.array(I1)
@@ -73,7 +73,7 @@ np.set_printoptions(threshold=np.inf)
 #System setup values and real coordinates
 #All units in um
 l=400000  #(40cm)  #Distance between camera/projector plane and reference plane
-d=80000   #(8cm)Distance between camera and projector
+d=70000   #(8cm)Distance between camera and projector
 f=10000   #Frequency of the projected fringe
 
 M=1024 #Number of pixels along x axis
