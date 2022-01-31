@@ -73,7 +73,7 @@ np.set_printoptions(threshold=np.inf)
 #System setup values and real coordinates
 #All units in um
 l=400000  #(40cm)  #Distance between camera/projector plane and reference plane
-d=80000   #(8cm)Distance between camera and projector
+d=0.00000001   #(8cm)Distance between camera and projector
 f=10000   #Frequency of the projected fringe
 
 M=1024 #Number of pixels along x axis
