@@ -78,8 +78,8 @@ f=10000   #Frequency of the projected fringe
 
 M=1024 #Number of pixels along x axis
 N=1024 #Number of pixels along y axis
-dx=35.16 #size of pixels (35um)
-dy=35.16
+dx=5.86 #size of pixels (35um)
+dy=5.86
 u=M/2*dx  #image size (width of camera 36mm)
 v=N/2*dy
 xx=np.linspace(-u,u,num=M)
