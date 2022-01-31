@@ -7,6 +7,7 @@ import cv2
 from PIL import Image
 from skimage import data, img_as_float, color, exposure
 from skimage.restoration import unwrap_phase
+from scipy.ndimage import gaussian_filter
 
 #Functions
 
@@ -121,6 +122,7 @@ z=reconst(realphase_ob,realphase_r,l,d,f)
 #l=np.where(z>-20.) 
 #z[l]=-32.
 
+z=gaussian_filter(z, sigma=5)
 
 
 
