@@ -166,7 +166,7 @@ plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrap
 fig = plt.figure(5)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-#ax.view_init(40, 10)
+ax.view_init(40, 10)
 plt.savefig("reconstruction3D2.png")                         #3D plot of unwrapped phase
 plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase
 
