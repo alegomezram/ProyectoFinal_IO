@@ -181,7 +181,7 @@ angle=np.arange(0,360,1)
 fig = plt.figure()
 ax = Axes3D(fig)
 scat = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='gray', edgecolor='none')
-
+ax.set_axis_off()
 
 def init():
     ax.view_init(elev=40., azim=30)
