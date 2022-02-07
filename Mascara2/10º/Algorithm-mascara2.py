@@ -7,7 +7,7 @@ import cv2
 from PIL import Image
 from skimage import data, img_as_float, color, exposure
 from skimage.restoration import unwrap_phase
-from celluloid import Camera
+#from celluloid import Camera
 from matplotlib import animation
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -184,12 +184,12 @@ scat = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='gray', edgecolor='none
 ax.set_axis_off()
 
 def init():
-    ax.view_init(elev=40., azim=30)
+    ax.view_init(elev=10., azim=10)
     return [scat]
 
 
 def animate(i):
-    ax.view_init(elev= 40, azim=i)
+    ax.view_init(elev= i, azim=10)
     return [scat]
 
 
@@ -197,4 +197,4 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=360, interval=20, blit=True)
 # Save
-anim.save('Mascara2.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
+anim.save('Mascara2-2.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
