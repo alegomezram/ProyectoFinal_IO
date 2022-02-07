@@ -8,6 +8,9 @@ from PIL import Image
 from skimage import data, img_as_float, color, exposure
 from skimage.restoration import unwrap_phase
 from scipy.ndimage import gaussian_filter
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import animation
+
 
 #Functions
 
@@ -139,7 +142,7 @@ z=gaussian_filter(z, sigma=5)
 
 # plt.figure(3)
 # plt.imshow(z, cmap='gray')
-
+"""
 #Object
 fig = plt.figure(1)
 plt.imsave("1phasewrap_obj2D.png",phase,cmap='gray')  #2D plot of wrapped phase
@@ -169,7 +172,31 @@ fig = plt.figure(5)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 #ax.view_init(40, 10)
+ax.set_axis_off()
 plt.savefig("reconstruction3D.png")                         #3D plot of unwrapped phase
 plt.imsave("5reconstruction2D.png",z, cmap='gray') #2D plot of unwrapped phase
+"""
 
+
+fig = plt.figure()
+ax = Axes3D(fig)
+scat = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='gray', edgecolor='none')
+ax.set_axis_off()
+
+
+def init():
+    ax.view_init(elev=40, azim=0)
+    return [scat]
+
+
+def animate(i):
+    ax.view_init(elev= 40, azim=i)
+    return [scat]
+
+
+# Animate
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=360, interval=20, blit=True)
+# Save
+anim.save('Engranaje3.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
 

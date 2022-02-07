@@ -7,6 +7,10 @@ import cv2
 from PIL import Image
 from skimage import data, img_as_float, color, exposure
 from skimage.restoration import unwrap_phase
+from celluloid import Camera
+from matplotlib import animation
+from mpl_toolkits.mplot3d import Axes3D
+
 
 #Functions
 
@@ -139,7 +143,7 @@ z=reconst(realphase_ob,realphase_r,l,d,f)
 # plt.imshow(z, cmap='gray')
 
 #Object
-fig = plt.figure(1)
+"""fig = plt.figure(1)
 plt.imsave("1phasewrap_obj2D.png",phase,cmap='gray')  #2D plot of wrapped phase
 
 #Reference plane
@@ -166,8 +170,31 @@ plt.imsave("4phaseunwrap_ref2D.png",realphase_r, cmap='gray') #2D plot of unwrap
 fig = plt.figure(5)
 ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
-ax.view_init(40, 10)
+ax.view_init(40, 30)
 plt.savefig("reconstruction3D2.png")                         #3D plot of unwrapped phase
-plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase
+plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase"""
 
 
+angle=np.arange(0,360,1)
+
+
+fig = plt.figure()
+ax = Axes3D(fig)
+scat = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='gray', edgecolor='none')
+
+
+def init():
+    ax.view_init(elev=40., azim=30)
+    return [scat]
+
+
+def animate(i):
+    ax.view_init(elev= 40, azim=i)
+    return [scat]
+
+
+# Animate
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=360, interval=20, blit=True)
+# Save
+anim.save('Mascara2.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
