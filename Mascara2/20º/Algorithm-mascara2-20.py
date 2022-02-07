@@ -7,6 +7,8 @@ import cv2
 from PIL import Image
 from skimage import data, img_as_float, color, exposure
 from skimage.restoration import unwrap_phase
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import animation
 
 #Functions
 
@@ -123,7 +125,7 @@ z=reconst(realphase_ob,realphase_r,l,d,f)
 
 
 
-
+"""
 # Plots
 # plt.figure(1)
 # #ax = plt.axes(projection='3d')
@@ -168,6 +170,26 @@ ax = plt.axes(projection='3d')
 surf = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='viridis', edgecolor='none')
 ax.view_init(40, 10)
 plt.savefig("reconstruction3D2.png")                         #3D plot of unwrapped phase
-plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase
+plt.imsave("5reconstruction2D2.png",z, cmap='gray') #2D plot of unwrapped phase"""
 
 
+fig = plt.figure()
+ax = Axes3D(fig)
+scat = ax.plot_surface(x, y, z,rstride=5, cstride=5,cmap='gray', edgecolor='none')
+ax.set_axis_off()
+
+def init():
+    ax.view_init(elev=0, azim=10)
+    return [scat]
+
+
+def animate(i):
+    ax.view_init(elev= i, azim=10)
+    return [scat]
+
+
+# Animate
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=360, interval=20, blit=True)
+# Save
+anim.save('Mascara20-1.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
