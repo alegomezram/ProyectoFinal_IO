@@ -185,12 +185,12 @@ ax.set_axis_off()
 
 
 def init():
-    ax.view_init(elev=40, azim=0)
+    ax.view_init(elev=10, azim=0)
     return [scat]
 
 
 def animate(i):
-    ax.view_init(elev= 40, azim=i)
+    ax.view_init(elev= i, azim=0)
     return [scat]
 
 
@@ -198,5 +198,5 @@ def animate(i):
 anim = animation.FuncAnimation(fig, animate, init_func=init,
                                frames=360, interval=20, blit=True)
 # Save
-anim.save('Engranaje3.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
+anim.save('Engranaje2.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
 
